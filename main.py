@@ -15,4 +15,10 @@ def get_categories():
         })
     return categories
 
-print(get_categories())
+def download_images(categories):
+    for category in categories:
+        img_data = requests.get(category['src']).content
+        with open(f'./icons/{category["label"].replace("/", " ")}.jpg', 'wb') as handler:
+            handler.write(img_data)
+
+download_images(get_categories())
